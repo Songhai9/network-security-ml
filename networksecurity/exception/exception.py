@@ -1,7 +1,7 @@
 """Custom exception with the source file and line number of an error."""
 
 import sys
-from app_logging.logger import logger
+from networksecurity.app_logging.logger import logger
 
 
 class NetworkSecurityException(Exception):
