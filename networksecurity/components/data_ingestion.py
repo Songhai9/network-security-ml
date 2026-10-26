@@ -33,10 +33,15 @@ class DataIngestion:
         try:
             database_name = self.data_ingestion_config.database_name
             collection_name = self.data_ingestion_config.collection_name
-            self.mongo_client = pymongo.MongoClient(MONGODB_URL)
-            collection = self.mongo_client[database_name][collection_name]
+            with pymongo.MongoClient(MONGODB_URL) as mongo_client:
+                collection = mongo_client[database_name][collection_name]
+                df = pd.DataFrame(list(collection.find()))
 
-            df = pd.DataFrame(list(collection.find()))
+            if df.empty:
+                raise ValueError(
+                    f"MongoDB collection '{database_name}.{collection_name}' is empty."
+                )
+
             if "_id" in df.columns.to_list():
                 df = df.drop("_id", axis=1)
 
@@ -51,7 +56,6 @@ class DataIngestion:
             # Create folder
             dir_path = os.path.dirname(feature_store_dir)
             os.makedirs(dir_path, exist_ok=True)
-            file_path = os.path.join(feature_store_dir, self.data_ingestion_config.collection_name + ".csv")
             df.to_csv(feature_store_dir, index=False, header=True)
         except Exception as e:
             raise NetworkSecurityException(e, sys)
@@ -59,7 +63,9 @@ class DataIngestion:
     def split_data_as_train_test(self, df: pd.DataFrame):
         try:
             train_set, test_set = train_test_split(
-                df, test_size=self.data_ingestion_config.train_test_split_ratio
+                df,
+                test_size=self.data_ingestion_config.train_test_split_ratio,
+                random_state=42,
             )
             logger.info("Performed train test split on the dataset")
             logger.info(
@@ -85,7 +91,7 @@ class DataIngestion:
     def initiate_data_ingestion(self):
         try:
             df = self.export_collection_as_dataframe()
-            df = self.export_data_to_feature_store(df)
+            self.export_data_to_feature_store(df)
             self.split_data_as_train_test(df)
             dataingestionartifact = DataIngestionArtifact(
                 trained_file_path=self.data_ingestion_config.training_file_path,

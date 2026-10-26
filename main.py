@@ -2,7 +2,7 @@ from networksecurity.components.data_ingestion import DataIngestion
 from networksecurity.exception.exception import NetworkSecurityException
 from networksecurity.app_logging.logger import logger
 from networksecurity.entity.config_entity import DataIngestionConfig
-from networksecurity.entity.artifact_entity import TrainingPipelineConfig
+from networksecurity.entity.config_entity import TrainingPipelineConfig
 import sys
 
 if __name__ == "__main__":
