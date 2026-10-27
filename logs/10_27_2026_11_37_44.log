@@ -1,0 +1,8 @@
+[ 2026-10-27 11:38:33,339 ] 1025 httpx - INFO - HTTP Request: POST https://dagshub.com/login/oauth/middleman "HTTP/1.1 200 OK"
+[ 2026-10-27 11:38:37,537 ] 1025 httpx - INFO - HTTP Request: POST https://dagshub.com/login/oauth/access_token "HTTP/1.1 200 OK"
+[ 2026-10-27 11:38:40,711 ] 1025 httpx - INFO - HTTP Request: GET https://dagshub.com/api/v1/user "HTTP/1.1 200 OK"
+[ 2026-10-27 11:38:40,712 ] 107 dagshub - INFO - Accessing as Songhai9
+[ 2026-10-27 11:38:45,675 ] 1025 httpx - INFO - HTTP Request: GET https://dagshub.com/api/v1/repos/Songhai9/network-security-ml "HTTP/1.1 200 OK"
+[ 2026-10-27 11:38:46,143 ] 1025 httpx - INFO - HTTP Request: GET https://dagshub.com/api/v1/user "HTTP/1.1 200 OK"
+[ 2026-10-27 11:38:46,143 ] 107 dagshub - INFO - Initialized MLflow to track repo "Songhai9/network-security-ml"
+[ 2026-10-27 11:38:46,143 ] 107 dagshub - INFO - Repository Songhai9/network-security-ml initialized!
