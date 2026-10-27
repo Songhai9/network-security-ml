@@ -16,7 +16,7 @@ from networksecurity.entity.config_entity import DataTransformationConfig
 
 from networksecurity.exception.exception import NetworkSecurityException
 from networksecurity.app_logging.logger import logger
-from networksecurity.utils.utils import save_numpy_array_data, save_object
+from networksecurity.utils.main_utils.utils import save_numpy_array_data, save_object
 
 class DataTransformation:
     def __init__(self, data_validation_artifact: DataValidationArtifact,
