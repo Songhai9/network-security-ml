@@ -1,0 +1,27 @@
+[ 2026-10-27 09:53:25,201 ] 15 networksecurity - INFO - Enter the try block
+[ 2026-10-27 09:53:25,201 ] 16 networksecurity - INFO - Starting data ingestion
+[ 2026-10-27 09:53:26,391 ] 70 networksecurity - INFO - Performed train test split on the dataset
+[ 2026-10-27 09:53:26,391 ] 71 networksecurity - INFO - Exited split_data_as_train_test method of DataIngestion class
+[ 2026-10-27 09:53:26,408 ] 85 networksecurity - INFO - Exported training dataset to file: [artifact/10_27_2026_09_53_25/data_ingestion/ingested/train.csv] and testing dataset to file: [artifact/10_27_2026_09_53_25/data_ingestion/ingested/test.csv]
+[ 2026-10-27 09:53:26,409 ] 18 networksecurity - INFO - Data Ingestion completed
+[ 2026-10-27 09:53:26,410 ] 25 networksecurity - INFO - Starting data validation
+[ 2026-10-27 09:53:26,414 ] 33 networksecurity - INFO - Required number of columns: 2
+[ 2026-10-27 09:53:26,415 ] 34 networksecurity - INFO - Dataframe has columns: Index(['having_IP_Address', 'URL_Length', 'Shortining_Service',
+       'having_At_Symbol', 'double_slash_redirecting', 'Prefix_Suffix',
+       'having_Sub_Domain', 'SSLfinal_State', 'Domain_registeration_length',
+       'Favicon', 'port', 'HTTPS_token', 'Request_URL', 'URL_of_Anchor',
+       'Links_in_tags', 'SFH', 'Submitting_to_email', 'Abnormal_URL',
+       'Redirect', 'on_mouseover', 'RightClick', 'popUpWidnow', 'Iframe',
+       'age_of_domain', 'DNSRecord', 'web_traffic', 'Page_Rank',
+       'Google_Index', 'Links_pointing_to_page', 'Statistical_report',
+       'Result'],
+      dtype='str')
+[ 2026-10-27 09:53:26,460 ] 27 networksecurity - INFO - Data validation completed
+[ 2026-10-27 09:53:26,460 ] 34 networksecurity - INFO - Starting data transformation
+[ 2026-10-27 09:53:26,460 ] 59 networksecurity - INFO - Entered the initiate_data_transformation method of DataTransformation class
+[ 2026-10-27 09:53:26,464 ] 41 networksecurity - INFO - Entered the get_data_transformer_object method of DataTransformation class
+[ 2026-10-27 09:53:26,464 ] 46 networksecurity - INFO - Initialized the KNNImputer object in get_data_transformer_object method of DataTransformation class
+[ 2026-10-27 09:53:26,464 ] 50 networksecurity - INFO - Initialized the Pipeline object in get_data_transformer_object method of DataTransformation class
+[ 2026-10-27 09:53:26,473 ] 53 networksecurity - INFO - Exiting the save_object method of utils class
+[ 2026-10-27 09:53:26,474 ] 94 networksecurity - INFO - Exited the initiate_data_transformation method of DataTransformation class
+[ 2026-10-27 09:53:26,474 ] 36 networksecurity - INFO - Data transformation completed
