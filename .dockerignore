@@ -1,0 +1,22 @@
+# Only the application, its serving models, and the container check enter the image.
+**
+!app.py
+!setup.py
+!requirements.txt
+!networksecurity/
+!networksecurity/**
+!templates/
+!templates/**
+!final_models/
+!final_models/model.pkl
+!final_models/preprocessor.pkl
+!scripts/
+!scripts/smoke_container.py
+
+# Also exclude generated files or local credentials inside included directories.
+**/__pycache__/
+**/*.pyc
+**/.env
+**/.env.*
+**/.aws/
+**/logs/

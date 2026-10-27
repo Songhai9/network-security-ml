@@ -1,22 +1,68 @@
-name: workflow
+name: Build and publish to ECR
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
+  workflow_dispatch:
 
+permissions:
+  contents: read
+
+env:
+  AWS_REGION: eu-north-1
+  AWS_ROLE_ARN: arn:aws:iam::429502077256:role/networksecurity-github-ecr-push
+  ECR_REGISTRY: 429502077256.dkr.ecr.eu-north-1.amazonaws.com
+  ECR_REPOSITORY: networksecurity
 
 jobs:
-    integration:
-        name: Continuous Integration
-        runs-on: ubuntu-latest
-        steps:
-            - name: Checkout code
-              uses: actions/checkout@v3
-            
-            - name: Lint code
-              run: echo "Linting code..."
-            
-            - name: Run tests
-              run: echo "Running tests..."
+  container:
+    name: Build, verify, and publish the image
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    permissions:
+      contents: read
+      id-token: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - name: Build the Linux amd64 image
+        env:
+          LOCAL_IMAGE: networksecurity:${{ github.sha }}
+        run: docker build --pull --platform linux/amd64 --tag "$LOCAL_IMAGE" .
+
+      - name: Verify API startup and CSV prediction
+        env:
+          LOCAL_IMAGE: networksecurity:${{ github.sha }}
+        run: |
+          set -euo pipefail
+          docker run --detach --name networksecurity-check "$LOCAL_IMAGE"
+          trap 'docker logs networksecurity-check; docker rm --force networksecurity-check' EXIT
+          docker exec networksecurity-check python scripts/smoke_container.py
+
+      - name: Authenticate to AWS with OIDC
+        if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+        uses: aws-actions/configure-aws-credentials@v6.3.0
+        with:
+          role-to-assume: ${{ env.AWS_ROLE_ARN }}
+          aws-region: ${{ env.AWS_REGION }}
+          allowed-account-ids: '429502077256'
+          role-session-name: networksecurity-${{ github.run_id }}
+
+      - name: Publish the verified image to ECR
+        if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+        env:
+          LOCAL_IMAGE: networksecurity:${{ github.sha }}
+        run: |
+          set -euo pipefail
+          aws ecr get-login-password --region "$AWS_REGION" \
+            | docker login --username AWS --password-stdin "$ECR_REGISTRY"
+          trap 'docker logout "$ECR_REGISTRY"' EXIT
+          IMAGE_TAG="${GITHUB_SHA}-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
+          IMAGE_URI="$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
+          docker tag "$LOCAL_IMAGE" "$IMAGE_URI"
+          docker push "$IMAGE_URI"
+          printf 'Published image: `%s`\n' "$IMAGE_URI" >> "$GITHUB_STEP_SUMMARY"
