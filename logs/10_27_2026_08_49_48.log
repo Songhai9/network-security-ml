@@ -1,0 +1,6 @@
+[ 2026-10-27 08:49:49,385 ] 14 networksecurity - INFO - Enter the try block
+[ 2026-10-27 08:49:49,385 ] 15 networksecurity - INFO - Starting data ingestion
+[ 2026-10-27 08:49:50,187 ] 70 networksecurity - INFO - Performed train test split on the dataset
+[ 2026-10-27 08:49:50,187 ] 71 networksecurity - INFO - Exited split_data_as_train_test method of DataIngestion class
+[ 2026-10-27 08:49:50,204 ] 85 networksecurity - INFO - Exported training dataset to file: [artifact/10_27_2026_08_49_49/data_ingestion/ingested/train.csv] and testing dataset to file: [artifact/10_27_2026_08_49_49/data_ingestion/ingested/test.csv]
+[ 2026-10-27 08:49:50,204 ] 17 networksecurity - INFO - Data Ingestion completed

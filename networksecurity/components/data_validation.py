@@ -1,7 +1,8 @@
 from networksecurity.entity.artifact_entity import DataIngestionArtifact, DataValidationArtifact
 from networksecurity.entity.config_entity import DataIngestionConfig
-from networksecurity.exception import NetworkSecurityException
-from networksecurity.app_logging import logging
+from networksecurity.entity.config_entity import DataValidationConfig
+from networksecurity.exception.exception import NetworkSecurityException
+from networksecurity.app_logging.logger import logger
 from networksecurity.constant.training_pipeline import SCHEMA_FILE_PATH
 from networksecurity.utils.utils import read_yaml_file, write_yaml_file
 from scipy.stats import ks_2samp
@@ -11,7 +12,7 @@ import os, sys
 
 class DataValidation:
     def __init__(self, data_ingestion_artifact: DataIngestionArtifact,
-                 data_validation_config: DataIngestionConfig):
+                 data_validation_config: DataValidationConfig):
         try:
             self.data_ingestion_artifact = data_ingestion_artifact
             self.data_validation_config = data_validation_config
@@ -29,8 +30,8 @@ class DataValidation:
     def validate_number_of_columns(self, dataframe: pd.DataFrame) -> bool:
         try:
             number_of_columns = len(self._schema_confing)
-            logging.info(f"Required number of columns: {number_of_columns}")
-            logging.info(f"Dataframe has columns: {dataframe.columns}")
+            logger.info(f"Required number of columns: {number_of_columns}")
+            logger.info(f"Dataframe has columns: {dataframe.columns}")
             if len(dataframe.columns) == number_of_columns:
                 return True
             return False
