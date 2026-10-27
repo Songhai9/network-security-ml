@@ -1,0 +1,53 @@
+[ 2026-10-27 12:18:26,149 ] 1025 httpx - INFO - HTTP Request: GET https://dagshub.com/api/v1/user "HTTP/1.1 200 OK"
+[ 2026-10-27 12:18:26,153 ] 107 dagshub - INFO - Accessing as Songhai9
+[ 2026-10-27 12:18:30,055 ] 1025 httpx - INFO - HTTP Request: GET https://dagshub.com/api/v1/repos/Songhai9/network-security-ml "HTTP/1.1 200 OK"
+[ 2026-10-27 12:18:30,668 ] 1025 httpx - INFO - HTTP Request: GET https://dagshub.com/api/v1/user "HTTP/1.1 200 OK"
+[ 2026-10-27 12:18:30,668 ] 107 dagshub - INFO - Initialized MLflow to track repo "Songhai9/network-security-ml"
+[ 2026-10-27 12:18:30,668 ] 107 dagshub - INFO - Repository Songhai9/network-security-ml initialized!
+[ 2026-10-27 12:18:30,668 ] 96 networksecurity - INFO - Entered the run_pipeline method of TrainingPipeline class
+[ 2026-10-27 12:18:30,668 ] 39 networksecurity - INFO - Entered the start_data_ingestion method of TrainingPipeline class
+[ 2026-10-27 12:18:30,668 ] 41 networksecurity - INFO - Start data ingestion
+[ 2026-10-27 12:18:31,659 ] 70 networksecurity - INFO - Performed train test split on the dataset
+[ 2026-10-27 12:18:31,659 ] 71 networksecurity - INFO - Exited split_data_as_train_test method of DataIngestion class
+[ 2026-10-27 12:18:31,679 ] 85 networksecurity - INFO - Exported training dataset to file: [artifact/10_27_2026_12_18_30/data_ingestion/ingested/train.csv] and testing dataset to file: [artifact/10_27_2026_12_18_30/data_ingestion/ingested/test.csv]
+[ 2026-10-27 12:18:31,679 ] 44 networksecurity - INFO - Data ingestion completed and artifact is created
+[ 2026-10-27 12:18:31,679 ] 51 networksecurity - INFO - Entered the start_data_validation method of TrainingPipeline class
+[ 2026-10-27 12:18:31,681 ] 57 networksecurity - INFO - Initiate the data validation
+[ 2026-10-27 12:18:31,685 ] 33 networksecurity - INFO - Required number of columns: 2
+[ 2026-10-27 12:18:31,685 ] 34 networksecurity - INFO - Dataframe has columns: Index(['having_IP_Address', 'URL_Length', 'Shortining_Service',
+       'having_At_Symbol', 'double_slash_redirecting', 'Prefix_Suffix',
+       'having_Sub_Domain', 'SSLfinal_State', 'Domain_registeration_length',
+       'Favicon', 'port', 'HTTPS_token', 'Request_URL', 'URL_of_Anchor',
+       'Links_in_tags', 'SFH', 'Submitting_to_email', 'Abnormal_URL',
+       'Redirect', 'on_mouseover', 'RightClick', 'popUpWidnow', 'Iframe',
+       'age_of_domain', 'DNSRecord', 'web_traffic', 'Page_Rank',
+       'Google_Index', 'Links_pointing_to_page', 'Statistical_report',
+       'Result'],
+      dtype='str')
+[ 2026-10-27 12:18:31,731 ] 59 networksecurity - INFO - Data validation completed and artifact is created
+[ 2026-10-27 12:18:31,731 ] 66 networksecurity - INFO - Entered the start_data_transformation method of TrainingPipeline class
+[ 2026-10-27 12:18:31,731 ] 72 networksecurity - INFO - Initiate the data transformation
+[ 2026-10-27 12:18:31,731 ] 59 networksecurity - INFO - Entered the initiate_data_transformation method of DataTransformation class
+[ 2026-10-27 12:18:31,735 ] 41 networksecurity - INFO - Entered the get_data_transformer_object method of DataTransformation class
+[ 2026-10-27 12:18:31,735 ] 46 networksecurity - INFO - Initialized the KNNImputer object in get_data_transformer_object method of DataTransformation class
+[ 2026-10-27 12:18:31,735 ] 50 networksecurity - INFO - Initialized the Pipeline object in get_data_transformer_object method of DataTransformation class
+[ 2026-10-27 12:18:31,744 ] 55 networksecurity - INFO - Exiting the save_object method of utils class
+[ 2026-10-27 12:18:31,745 ] 55 networksecurity - INFO - Exiting the save_object method of utils class
+[ 2026-10-27 12:18:31,745 ] 96 networksecurity - INFO - Exited the initiate_data_transformation method of DataTransformation class
+[ 2026-10-27 12:18:31,745 ] 74 networksecurity - INFO - Data transformation completed and artifact is created
+[ 2026-10-27 12:18:31,745 ] 81 networksecurity - INFO - Entered the start_model_trainer method of TrainingPipeline class
+[ 2026-10-27 12:18:31,745 ] 87 networksecurity - INFO - Initiate the model trainer
+[ 2026-10-27 12:20:48,480 ] 67 networksecurity - INFO - Entered the load_object method of utils class
+[ 2026-10-27 12:20:48,485 ] 55 networksecurity - INFO - Exiting the save_object method of utils class
+[ 2026-10-27 12:20:48,495 ] 55 networksecurity - INFO - Exiting the save_object method of utils class
+[ 2026-10-27 12:20:48,495 ] 140 networksecurity - INFO - Model trainer artifact: ModelTrainerArtifact(trained_model_file_path='artifact/10_27_2026_12_18_30/model_trainer/trained_model/model.pkl', train_metric_artifact=ClassificationMetricArtifact(f1_score=0.9915521628498728, precision_score=0.9894373349583587, recall_score=0.9936760505915953), test_metric_artifact=ClassificationMetricArtifact(f1_score=0.9719034428175702, precision_score=0.9654088050314465, recall_score=0.9784860557768924))
+[ 2026-10-27 12:20:48,496 ] 89 networksecurity - INFO - Model trainer completed and artifact is created
+[ 2026-10-27 12:20:48,496 ] 101 networksecurity - INFO - Training pipeline completed successfully
+[ 2026-10-27 12:21:10,539 ] 67 networksecurity - INFO - Entered the load_object method of utils class
+[ 2026-10-27 12:21:10,540 ] 67 networksecurity - INFO - Entered the load_object method of utils class
+[ 2026-10-27 12:21:22,579 ] 67 networksecurity - INFO - Entered the load_object method of utils class
+[ 2026-10-27 12:21:22,580 ] 67 networksecurity - INFO - Entered the load_object method of utils class
+[ 2026-10-27 12:21:30,949 ] 67 networksecurity - INFO - Entered the load_object method of utils class
+[ 2026-10-27 12:21:30,949 ] 67 networksecurity - INFO - Entered the load_object method of utils class
+[ 2026-10-27 12:21:46,959 ] 67 networksecurity - INFO - Entered the load_object method of utils class
+[ 2026-10-27 12:21:46,959 ] 67 networksecurity - INFO - Entered the load_object method of utils class

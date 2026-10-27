@@ -53,6 +53,8 @@ class ModelTrainer:
                 best_model,
                 name="model",
                 registered_model_name="networksecurity_classifier",
+                serialization_format="skops",
+                skops_trusted_types=["sklearn.tree._tree.Tree"],
             )
 
         
