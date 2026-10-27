@@ -13,7 +13,7 @@ FILE_NAME: str = 'phishingData.csv'
 TRAIN_FILE_NAME: str = 'train.csv'
 TEST_FILE_NAME: str = 'test.csv'
 
-SCHEMA_FILE_PATH = os.path.join('data_schema', 'schema.yaml')
+SCHEMA_FILE_PATH = os.path.join('networksecurity', 'data_schema', 'schema.yaml')
 
 '''
 Data ingestion related constant start with DATA_INGESTION VAR NAME

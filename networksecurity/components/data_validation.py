@@ -84,11 +84,26 @@ class DataValidation:
 
             # check data drift
             status = self.detect_dataset_drift(base_df=train_df, current_df=test_df)
+            if not status:
+                error_message += f'Dataset drift detected\n'
+
+            # Save validated data
             dir_path = os.path.dirname(self.data_validation_config.valid_train_file_path)
             os.makedirs(dir_path, exist_ok=True)
 
             train_df.to_csv(
                 self.data_validation_config.valid_train_file_path, index=False, header=True
+            )
+            test_df.to_csv(
+                self.data_validation_config.valid_test_file_path, index=False, header=True
+            )
+            return DataValidationArtifact(
+                validation_status=status,
+                valid_train_file_path=self.data_validation_config.valid_train_file_path,
+                valid_test_file_path=self.data_validation_config.valid_test_file_path,
+                invalid_train_file_path=self.data_validation_config.invalid_train_file_path,
+                invalid_test_file_path=self.data_validation_config.invalid_test_file_path,
+                drift_report_file_path=self.data_validation_config.drift_report_file_path,
             )
         except Exception as e:
             raise NetworkSecurityException(e, sys)
